@@ -1,0 +1,1 @@
+Add Solution_BOJ_15486_퇴사2
