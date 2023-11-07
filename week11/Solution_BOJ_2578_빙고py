@@ -1,0 +1,68 @@
+def check_bingo(bingo):
+    cnt = 0
+    # 열 찾기
+    for i in range(5):
+        result = True
+        for j in range(5):
+            if bingo[i][j] != 0:
+                result = False
+                break
+
+        if result:
+            cnt += 1
+
+    # 행 찾기
+    vertical_bingo = list(zip(*bingo))
+    for i in range(5):
+        result2 = True
+        for j in range(5):
+            if vertical_bingo[i][j] != 0:
+                result2 = False
+                break
+        if result2:
+            cnt += 1
+
+    # 왼쪽 대각선 찾기
+    cross_bingo = True
+    for i in range(5):
+        if bingo[i][i] !=0:
+            cross_bingo = False
+            break
+
+
+    if cross_bingo:
+        cnt += 1
+
+    # 오른쪽 대각선 찾기
+    cross_r_bingo = True
+    for i in range(5):
+        if bingo[i][4-i] != 0:
+            cross_r_bingo = False
+            break
+
+    if cross_r_bingo:
+        cnt += 1
+
+
+    if cnt >= 3:
+        return True
+    else:
+        return False
+
+
+bingo = [list(map(int, input().split())) for _ in range(5)]
+say = []
+
+for _ in range(5):
+    say += list(map(int, input().split()))
+
+for k in range(25):
+    for i in range(5):
+        for j in range(5):
+            if bingo[i][j] == say[k]:
+                bingo[i][j] = 0
+    if check_bingo(bingo) == True:
+        ans = k + 1
+        break
+
+print(ans)
