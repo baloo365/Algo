@@ -1,0 +1,19 @@
+K = int(input())
+buildings = list(map(int, input().split()))
+
+tree = [[] for _ in range(K)]
+
+
+def tree_print(start, end, i):
+    mid = (start + end) // 2
+    tree[i].append(buildings[mid])
+    if mid <= start or mid >= end:
+        return
+    tree_print(start, mid, i+1)
+    tree_print(mid+1, end, i+1)
+
+
+tree_print(0, len(buildings), 0)
+# print(tree)
+for i in range(K):
+    print(*tree[i])
